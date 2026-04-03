@@ -17,7 +17,7 @@ class User(Base):
 
     full_name = db.Column(db.String(80), nullable=False)
     email = db.Column(db.String(100), nullable=False)
-    password = db.Column(db.String(45), nullable=False)
+    password = db.Column(db.String(256), nullable=False)
 
     last_update = db.Column(db.DateTime, server_default=db.func.now())
 

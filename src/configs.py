@@ -1,6 +1,6 @@
 # .env and configs parser
 
-
+import hashlib
 import os
 from dotenv import load_dotenv
 from src.utils import Singleton

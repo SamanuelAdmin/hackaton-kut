@@ -32,6 +32,12 @@ class DatabaseConnectionInterface(ABC):
     def engine(self): ...
 
 
+class Finder(ABC):
+    _object_type: object = object
+
+    def find_by(self, *args, **kwargs) -> _object_type: ...
+
+
 class CRUD(ABC):
     _object_type: object = object
 
@@ -46,3 +52,7 @@ class CRUD(ABC):
 
     @abstractmethod
     def delete(self, id: int) -> bool: ...
+
+
+class CrudFinder(CRUD, Finder):
+    pass
