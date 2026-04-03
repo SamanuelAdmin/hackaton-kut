@@ -1,4 +1,7 @@
 from pydantic import BaseModel, Field
+from enum import Enum
+
+from src.utils import DefaultEnumMeta
 
 
 class UserRights(str, Enum, metaclass=DefaultEnumMeta):

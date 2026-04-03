@@ -1,9 +1,7 @@
-from enum import Enum
 from sqlalchemy.orm import sessionmaker
 import sqlalchemy as db
 from sqlalchemy.ext.declarative import declarative_base
 
-from src.utils import DefaultEnumMeta
 
 Base = declarative_base()
 
