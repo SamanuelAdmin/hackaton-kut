@@ -1,0 +1,2 @@
+class DatabaseUnableToConnect(Exception):
+    pass
