@@ -22,6 +22,11 @@ class DefaultEnumMeta(EnumMeta):
         return super().__call__(value, *args, **kwargs)
 
 
+class DatabaseConnectionInterface(ABC):
+    @property
+    def connection(self): ...
+
+
 class CRUD(ABC):
     _object_type: object = object
 

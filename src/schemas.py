@@ -1,4 +1,5 @@
 from pydantic import BaseModel, Field
+from typing import Optional
 from enum import Enum
 
 from src.utils import DefaultEnumMeta
@@ -24,8 +25,8 @@ class JWTBody(BaseModel):
 
 
 class UserDTO(BaseModel):
-    id: int
-    rights: UserRights
+    id: Optional[int]
+    rights: Optional[UserRights]
     full_name: str
     email: str
     password: str
