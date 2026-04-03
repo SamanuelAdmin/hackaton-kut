@@ -1,5 +1,5 @@
-from enum import EnumMeta
 from abc import ABC
+from enum import EnumMeta
 from typing import Optional
 
 
@@ -27,7 +27,7 @@ class CRUD(ABC):
 
     def create(self, obj: _object_type) -> bool: ...
 
-    def read(self, id: int) -> Optional[_object_type]: ...
+    def get(self, id: int) -> Optional[_object_type]: ...
 
     def update(self, obj: _object_type) -> bool: ...
 

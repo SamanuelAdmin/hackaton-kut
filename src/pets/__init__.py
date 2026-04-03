@@ -1,4 +1,6 @@
+from .models import Base, Pet
 from .router import router
-from .models import Pet, Base
 
-AccountsRouter = router
+PetsRouter = router
+
+# __all__ = ["Pet", "Base", "Pe"]

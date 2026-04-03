@@ -1,31 +1,39 @@
+from datetime import datetime
+
 from pydantic import BaseModel, Field
-from enum import Enum
 
-from src.utils import DefaultEnumMeta
-
-
-class UserRights(str, Enum, metaclass=DefaultEnumMeta):
-    USER = "user"
-    ADMIN = "admin"
-
-    def __init__(self):
-        return UserRights.USER
+from pets.enums import AnimalGender, AnimalStatus, AnimalTag, AnimalType
 
 
-class JWTHeader(BaseModel):
-    alg: str
-    token_type: str
+class CreatePetModel(BaseModel):
+    name: str = Field(max_length=32)
+    type: AnimalType
+    gender: AnimalGender
+    age: int
+    description: str
+    status: AnimalStatus
+    tags: list[AnimalTag]
 
 
-class JWTBody(BaseModel):
-    user_id: int
-    user_rights: str
-    ttl: int
-
-
-class UserDTO(BaseModel):
+class ReadPetModel(BaseModel):
     id: int
-    rights: UserRights
-    full_name: str
-    email: str
-    password: str
+
+    name: str = Field(max_length=32)
+    type: AnimalType
+    gender: AnimalGender
+    age: int
+    description: str
+    status: AnimalStatus
+    tags: list[AnimalTag] = []
+
+    created_at: datetime
+    updated_at: datetime
+
+
+class UpdatePetModel(CreatePetModel):
+    pass
+
+
+class AllPetsModel(BaseModel):
+    pets: list[ReadPetModel]
+    count: int

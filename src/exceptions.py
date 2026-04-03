@@ -1,2 +1,0 @@
-class DatabaseUnableToConnect(Exception):
-    pass
