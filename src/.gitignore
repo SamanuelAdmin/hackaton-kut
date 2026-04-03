@@ -1,0 +1,39 @@
+# environment
+.env
+.env/
+.venv/
+venv/
+.env.*
+!.env.example
+
+
+# IDE metadata
+.idea/
+.vscode/
+
+# databases
+*.sqlite3
+*.db
+
+# docker
+docker-compose.override.yml
+
+# logs
+logs/
+*.log
+
+# builds 
+dist/
+build/
+out/
+
+# [ PYTHON ]
+# cache and bins
+__pycache__/
+*.py[cod]
+*.pyo
+
+# tests
+.pytest_cache/
+.coverage
+htmlcov/
