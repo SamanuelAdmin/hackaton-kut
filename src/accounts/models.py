@@ -2,6 +2,8 @@ from sqlalchemy.orm import sessionmaker
 import sqlalchemy as db
 from sqlalchemy.ext.declarative import declarative_base
 
+from src.schemas import UserRights
+
 
 Base = declarative_base()
 
@@ -17,8 +19,8 @@ class User(Base):
     email = db.Column(db.String(100), nullable=False)
     password = db.Column(db.String(45), nullable=False)
 
-    last_update = db.Column(
-        db.TIMESTAMP,
-        nullable=False,
-        server_default=db.text("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"),
-    )
+    last_update = db.Column(db.DateTime, server_default=db.func.now())
+
+
+def load_models(engine):
+    Base.metadata.create_all(engine)

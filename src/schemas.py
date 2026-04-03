@@ -9,9 +9,6 @@ class UserRights(str, Enum, metaclass=DefaultEnumMeta):
     USER = "user"
     ADMIN = "admin"
 
-    def __init__(self):
-        return UserRights.USER
-
 
 class JWTHeader(BaseModel):
     alg: str

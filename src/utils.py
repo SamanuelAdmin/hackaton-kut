@@ -1,5 +1,5 @@
 from enum import EnumMeta
-from abc import ABC
+from abc import ABC, abstractmethod
 from typing import Optional
 
 
@@ -24,16 +24,25 @@ class DefaultEnumMeta(EnumMeta):
 
 class DatabaseConnectionInterface(ABC):
     @property
+    @abstractmethod
     def connection(self): ...
+
+    @property
+    @abstractmethod
+    def engine(self): ...
 
 
 class CRUD(ABC):
     _object_type: object = object
 
+    @abstractmethod
     def create(self, obj: _object_type) -> bool: ...
 
+    @abstractmethod
     def read(self, id: int) -> Optional[_object_type]: ...
 
+    @abstractmethod
     def update(self, obj: _object_type) -> bool: ...
 
+    @abstractmethod
     def delete(self, id: int) -> bool: ...

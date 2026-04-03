@@ -14,12 +14,18 @@ class DatabaseConnection(DatabaseConnectionInterface, Singleton):
         self.port = port
 
         try:
-            engine = create_engine(f"postgresql://{user}:{password}@{host}:{port}")
-            Session = sessionmaker(bind=engine)
+            self._engine = create_engine(
+                f"postgresql://{user}:{password}@{host}:{port}"
+            )
+            Session = sessionmaker(bind=self._engine)
             self._session = Session()
         except Exception as ex:
             print(ex)
             raise DatabaseUnableToConnect()
+
+    @property
+    def engine(self):
+        return self._engine
 
     @property
     def connection(self):
