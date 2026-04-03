@@ -1,9 +1,9 @@
 # environment
-.env
-.env/
+../.env
+../.env/
 .venv/
 venv/
-.env.*
+../.env.template
 !.env.example
 
 
@@ -32,10 +32,6 @@ out/
 __pycache__/
 *.py[cod]
 *.pyo
-
-# For alembic
-alembic/
-alembic.ini
 
 # tests
 .pytest_cache/

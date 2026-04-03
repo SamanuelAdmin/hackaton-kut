@@ -7,7 +7,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class DatabaseConfig(BaseModel):
     user: str
     password: str
-    host: int
+    host: str
     port: int
     name: str
 

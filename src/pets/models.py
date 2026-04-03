@@ -1,3 +1,4 @@
+from sqlalchemy.dialects.postgresql import ARRAY
 from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy import String, func
 from sqlalchemy.ext.declarative import declarative_base
@@ -19,7 +20,7 @@ class Pet(Base):
     age: Mapped[int]
     description: Mapped[str]
     status: Mapped[AnimalStatus]
-    tags: Mapped[list[AnimalTag]]
+    tags: Mapped[list[AnimalTag]] = mapped_column(ARRAY(String))
 
     created_at: Mapped[datetime] = mapped_column(
         server_default=func.now()
