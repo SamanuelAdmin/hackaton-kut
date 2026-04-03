@@ -1,24 +1,33 @@
-from typing import Optional
+from typing import AsyncGenerator
+
 from sqlalchemy import create_engine
+from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
 
-from .utils import Singleton
-from .exceptions import *
+from configs import settings
+
+# MODELS
+# from src.core.conifg import settings
+# from src.infra.db.models import Base, Admin
+# from src.services.hasher import Hasher
+# WARN:if remove this imports then all crashed and tables will not create
 
 
-class DatabaseConnection(Singleton):
-    def __init__(self, host: str, port: int, user: str, password: str):
-        self._user = user
-        self._password = password
-        self.host = host
-        self.port = port
+db = settings.db
+async_mysql_url = f"postgresql+asyncpg://{db.user}:{db.password}@{db.host}:{db.port}/{db.name}"
+sync_mysql_url = f"postgresql+psycopg2://{db.user}:{db.password}@{db.host}:{db.port}/{db.name}"
 
+async_engine = create_async_engine(async_mysql_url, echo=True)
+sync_engine = create_engine(sync_mysql_url, echo=True)
+
+AsyncSessionMaker = async_sessionmaker(
+    async_engine, expire_on_commit=False, autoflush=False
+)
+
+async def get_session() -> AsyncGenerator[AsyncSession, None]:
+    async with AsyncSessionMaker() as session:
         try:
-            self._connection = create_engine(
-                f"postgresql://{user}:{password}@{host}:{port}"
-            )
-        except Exception as ex:
-            raise DatabaseUnableToConnect()
-
-    @property
-    def connection(self):
-        return self._connection
+            yield session
+            await session.commit()
+        except:
+            await session.rollback()
+            raise

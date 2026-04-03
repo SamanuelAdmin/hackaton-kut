@@ -1,21 +1,32 @@
-# .env and configs parser
+from typing import ClassVar
+
+from pydantic import BaseModel
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
-import os
-from dotenv import load_dotenv
-from src.utils import Singleton
+class DatabaseConfig(BaseModel):
+    user: str
+    password: str
+    host: int
+    port: int
+    name: str
+
+    echo: bool
+    echo_pool: bool
 
 
-load_dotenv()
+class RunConfig(BaseModel):
+    host: str = "0.0.0.0"
+    port: int = 8000
 
+class Settings(BaseSettings):
+    model_config: ClassVar = SettingsConfigDict(
+        env_file=(".env.template", ".env"),
+        case_sensitive=False,
+        env_nested_delimiter="__",
+    )
 
-class Configs(dict, Singleton):
-    pass
+    run: RunConfig = RunConfig()
+    db: DatabaseConfig
 
-
-configs: dict[str, int | str] = {}
-configs.update(os.environ)
-
-# load jwt secret key
-with open("../jwt.private") as jwt_private_file:
-    configs["JWT_PRIVATE_KEY"] = jwt_private_file.read()
+settings = Settings()
