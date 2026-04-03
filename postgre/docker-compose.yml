@@ -1,16 +1,18 @@
 services:
-  database:
-    image: 'postgres:latest'
-    ports:
-     - 15432:5432
+  postgre:
+    image: postgres:latest
+    container_name: my_postgres
+    restart: always
     env_file:
       - .env
     networks:
-      - postgres-network
+    - postgres-network
+    ports:
+      - "5432:5432"
     volumes:
-      - ${PWD}/db-data/:/var/lib/postgresql/data/
-      - ${PWD}/init.sql:/docker-entrypoint-initdb.d/init.sql
-  
+      - ${PWD}/postgres_data:/var/lib/postgresql
+    user: root
+
   pgadmin:
     image: dpage/pgadmin4
     ports:
@@ -18,12 +20,12 @@ services:
     env_file:
       - .env
     depends_on:
-      - database
+      - postgre
     networks:
       - postgres-network
     volumes:
-      - ${PWD}/pgadmin-data/:/var/lib/pgadmin/
+      - ./pgadmin-data:/var/lib/pgadmin
 
-networks: 
+networks:
   postgres-network:
     driver: bridge
