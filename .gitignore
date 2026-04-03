@@ -38,6 +38,7 @@ pycache/
 
 # For alembic
 alembic/
+alembic.ini
 
 # tests
 .pytest_cache/

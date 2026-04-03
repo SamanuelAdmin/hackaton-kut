@@ -33,6 +33,10 @@ __pycache__/
 *.py[cod]
 *.pyo
 
+# For alembic
+alembic/
+alembic.ini
+
 # tests
 .pytest_cache/
 .coverage
