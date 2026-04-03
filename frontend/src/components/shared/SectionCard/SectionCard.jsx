@@ -8,9 +8,11 @@ export const SectionCard = ({ title, btnText, children, to }) => {
     <div className={styles.section}>
       <div className={styles.header}>
         <h2>{title}</h2>
-        <Link to={to}>
-          <Button>{btnText}</Button>
-        </Link>
+        {btnText && to && (
+          <Link to={to}>
+            <Button>{btnText}</Button>
+          </Link>
+        )}
       </div>
       <div>{children}</div>
     </div>

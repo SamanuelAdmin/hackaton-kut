@@ -47,7 +47,7 @@ export const HomePage = () => {
       <SectionCard
         title="Підтримати приют"
         btnText="Інша допомога >"
-        to="/catalog"
+        to="/news"
       >
         <DonateBlock />
       </SectionCard>

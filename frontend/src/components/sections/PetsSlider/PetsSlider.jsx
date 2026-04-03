@@ -31,7 +31,7 @@ export const PetsSlider = () => {
         centeredSlides={true}
         slidesPerView={3}
         spaceBetween={25}
-        speed={800}
+        speed={1400}
         autoplay={{
           delay: 2100,
           disableOnInteraction: false,
