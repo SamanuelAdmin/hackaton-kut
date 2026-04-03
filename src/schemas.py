@@ -17,12 +17,12 @@ class JWTToken(BaseModel):
     user_rights: str
     ttl: int
     creation_time: int
-    token: Optional[str]
+    token: str = Field(default="")
 
 
 class UserDTO(BaseModel):
-    id: Optional[int]
-    rights: Optional[UserRights]
+    id: int = Field(default=-1)
+    rights: UserRights = Field(default=UserRights())
     full_name: str
     email: str
     password: str  # encrypted

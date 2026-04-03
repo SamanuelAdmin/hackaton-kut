@@ -7,7 +7,7 @@ from .exceptions import *
 
 
 class DatabaseConnection(DatabaseConnectionInterface, Singleton):
-    def __init__(self, host: str, port: int, user: str, password: str):
+    def init(self, host: str, port: int, user: str, password: str):
         self._user = user
         self._password = password
         self.host = host
@@ -17,11 +17,11 @@ class DatabaseConnection(DatabaseConnectionInterface, Singleton):
             self._engine = create_engine(
                 f"postgresql://{user}:{password}@{host}:{port}"
             )
-            Session = sessionmaker(bind=self._engine)
-            self._session = Session()
         except Exception as ex:
             print(ex)
             raise DatabaseUnableToConnect()
+
+        self._init = True
 
     @property
     def engine(self):
@@ -29,4 +29,9 @@ class DatabaseConnection(DatabaseConnectionInterface, Singleton):
 
     @property
     def connection(self):
+        if not hasattr(self, "_init"):
+            raise NotInitialized()
+
+        Session = sessionmaker(bind=self._engine)
+        self._session = Session()
         return self._session

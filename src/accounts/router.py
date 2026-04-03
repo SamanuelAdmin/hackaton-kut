@@ -1,5 +1,6 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from src.accounts.service import UserService
+from src.accounts.exceptions import IncorrectPassword, IncorrectValue, UserNotFound
 from src.schemas import AuthDTO, JWTToken, RegistrationDTO
 
 from src.configs import configs
@@ -8,11 +9,23 @@ router = APIRouter(prefix="/accounts", tags=["accounts", "account"])
 user_service = UserService(configs["JWT_PRIVATE_KEY"])
 
 
-@router.get("/create")
+@router.post("/create")
 async def register(registerDTO: RegistrationDTO) -> JWTToken:
-    return user_service.create(registerDTO)
+    try:
+        jwt_token = user_service.create(registerDTO)
+    except IncorrectValue:
+        raise HTTPException(status_code=403, detail="Incorrect entered data.")
+
+    return jwt_token
 
 
-@router.get("/auth")
+@router.post("/auth")
 async def auth(authDTO: AuthDTO) -> JWTToken:
-    return user_service.auth(authDTO)
+    try:
+        jwt_token = user_service.auth(authDTO)
+    except IncorrectPassword:
+        raise HTTPException(status_code=403, detail="Incorrect creds.")
+    except UserNotFound:
+        raise HTTPException(status_code=404, detail="User not found.")
+
+    return jwt_token

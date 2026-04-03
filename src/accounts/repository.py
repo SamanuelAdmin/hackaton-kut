@@ -36,26 +36,28 @@ class UserRepository(CrudFinder):
     def find_by(self, field_name: str, field_value: str) -> Optional[User]:
         return self._connection.execute(
             select(User).where(getattr(User, field_name) == field_value)
-        )
+        ).scalar_one_or_none()
 
     @action
-    def create(self, obj: _object_type) -> bool:
-        self._connection.add(
-            User(
-                rights=obj.rights,
-                full_name=obj.full_name,
-                email=obj.email,
-                password=obj.password,
-            )
+    def create(self, obj: _object_type) -> int:
+        user = User(
+            rights=obj.rights,
+            full_name=obj.full_name,
+            email=obj.email,
+            password=obj.password,
         )
-        return True
+
+        self._connection.add(user)
+        self._connection.flush()
+
+        return user.id
 
     def read(self, id: int) -> Optional[_object_type]:
         self._connection.query(User).filter(User.id == id).first()
 
     @action
     def update(self, id, **kwargs) -> bool:
-        user = self.read(id)
+        user: User = self.read(id)
         if user is None:
             return False
 

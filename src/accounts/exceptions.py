@@ -4,3 +4,7 @@ class UserNotFound(Exception):
 
 class IncorrectPassword(Exception):
     pass
+
+
+class IncorrectValue(Exception):
+    pass

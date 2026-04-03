@@ -7,7 +7,8 @@ from src.utils import DatabaseConnectionInterface
 
 
 # database stuff
-databaseConnector: DatabaseConnectionInterface = DatabaseConnection(
+databaseConnector: DatabaseConnectionInterface = DatabaseConnection()
+databaseConnector.init(
     host=configs["DATABASE_HOST"],
     port=configs["DATABASE_PORT"],
     user=configs["DATABASE_USER"],
