@@ -36,6 +36,9 @@ pycache/
 *.py[cod]
 *.pyo
 
+# For alembic
+alembic/
+
 # tests
 .pytest_cache/
 .coverage
