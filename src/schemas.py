@@ -22,9 +22,6 @@ class JWTBody(BaseModel):
     user_rights: str
     ttl: int
 
-    class Config:
-        title = "UserJST"
-
 
 class UserDTO(BaseModel):
     id: int
