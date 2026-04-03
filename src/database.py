@@ -6,10 +6,8 @@ from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, Asyn
 from configs import settings
 
 # MODELS
-# from src.core.conifg import settings
-# from src.infra.db.models import Base, Admin
-# from src.services.hasher import Hasher
-# WARN:if remove this imports then all crashed and tables will not create
+# WARN: if remove this imports then all crashed and tables will not create
+from src.pets import  Pet
 
 
 db = settings.db

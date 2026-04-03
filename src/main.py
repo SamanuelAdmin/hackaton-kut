@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from src.accounts import AccountsRouter
+from src.pets import AccountsRouter
 
 
 app = FastAPI()
