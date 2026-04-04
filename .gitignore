@@ -1,9 +1,9 @@
 # environment
-.env
-.env/
+src/.env
+src/.env/
 .venv/
 venv/
-.env.*
+src/.env.template
 !.env.example
 
 # JWT

@@ -5,7 +5,7 @@ from sqlalchemy.dialects.postgresql import ARRAY
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import Mapped, mapped_column
 
-from pets.enums import *
+from pets.enums import AnimalType, AnimalGender, AnimalStatus, AnimalTag
 
 Base = declarative_base()
 
