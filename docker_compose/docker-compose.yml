@@ -1,0 +1,46 @@
+services:
+  accounts_ms:
+    build: ./accounts_ms
+    ports:
+      - "1337:8000"
+    volumes:
+      - ./accounts_ms:/app
+    depends_on:
+      - db
+    networks:
+      - backend
+
+  pets_ms:
+    build: ./pets_ms
+    ports:
+      - "1338:8000"
+    volumes:
+      - ./pets_ms:/app
+    depends_on:
+      - db
+    networks:
+      - backend
+
+  db:
+    image: postgres
+    restart: always
+    shm_size: 1gb
+    env_file:
+      - .env
+    ports:
+      - 5432:5432
+    volumes:
+      - ./pgadmin-data:/var/lib/pgadmin
+    networks:
+      - backend
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - backend
+
+networks:
+  backend:
