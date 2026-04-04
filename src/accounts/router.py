@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
-from src.accounts.service import UserService
-from src.accounts.exceptions import IncorrectPassword, IncorrectValue, UserNotFound
+from .service import UserService
+from .exceptions import IncorrectPassword, IncorrectValue, UserNotFound
 from src.schemas import AuthDTO, JWTToken, RegistrationDTO
 
 from src.configs import configs

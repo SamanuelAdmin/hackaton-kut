@@ -2,8 +2,8 @@ from pydantic import BaseModel, Field
 from typing import Optional
 from enum import Enum
 
-from src.utils import DefaultEnumMeta
-from src.accounts.configs import jwt_hash_alg
+from .utils import DefaultEnumMeta
+from .accounts.configs import jwt_hash_alg
 
 
 class UserRights(str, Enum, metaclass=DefaultEnumMeta):

@@ -5,10 +5,10 @@ import hashlib
 import datetime
 import json
 
-from src.accounts.exceptions import IncorrectPassword, UserNotFound
-from src.accounts.configs import password_hash_alg, jwt_hash_alg
-from src.accounts.repository import UserRepository
-from src.accounts.exceptions import *
+from .exceptions import IncorrectPassword, UserNotFound
+from .configs import password_hash_alg, jwt_hash_alg
+from .repository import UserRepository
+from .exceptions import *
 from src.schemas import JWTToken, UserDTO, UserRights, RegistrationDTO, AuthDTO
 from src.utils import CrudFinder
 

@@ -1,9 +1,10 @@
+import uvicorn
 from fastapi import FastAPI
 
-from src.accounts import AccountsRouter, load_models
-from src.database import DatabaseConnection
-from src.configs import *
-from src.utils import DatabaseConnectionInterface
+from .accounts import AccountsRouter, load_models
+from .database import DatabaseConnection
+from .configs import *
+from .utils import DatabaseConnectionInterface
 
 
 # database stuff
@@ -21,3 +22,7 @@ app = FastAPI()
 
 # including routers
 app.include_router(AccountsRouter)
+
+
+if __name__ == "__main__":
+    uvicorn.run("src.main:app", host=configs["host"], port=configs["port"], reload=True)
