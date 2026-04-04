@@ -21,9 +21,6 @@ load_models(databaseConnector.engine)
 
 app = FastAPI()
 
-# including routers
-app.include_router(AccountsRouter)
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -35,6 +32,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# including routers
+app.include_router(AccountsRouter)
 
 
 if __name__ == "__main__":
