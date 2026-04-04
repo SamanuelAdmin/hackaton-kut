@@ -22,7 +22,7 @@ class RunConfig(BaseModel):
 
 class Settings(BaseSettings):
     model_config: ClassVar = SettingsConfigDict(
-        env_file=(".env.template", ".env"),
+        env_file=(".env.template", ".env", "../.env"),
         case_sensitive=False,
         env_nested_delimiter="__",
     )

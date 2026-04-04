@@ -2,48 +2,48 @@ from enum import Enum
 
 
 class AnimalType(Enum):
-    CAT = "Кот/Кошка"
+    CAT = "Кіт/Кішка"
     DOG = "Собака"
 
 
 class AnimalGender(Enum):
-    MALE = "Самец"
+    MALE = "Самець"
     FEMALE = "Самка"
 
 
 class AnimalStatus(Enum):
-    WAITING = "Ожидает"
-    ADOPTED = "Усыновлен"
-    UNAVAILABLE = "Недоступен"
+    WAITING = "Очікує"
+    ADOPTED = "Усиновлений"
+    UNAVAILABLE = "Недоступний"
 
 
 class AnimalTag(str, Enum):
-    # --- НОВОЕ: РАЗМЕР (Розмір) ---
-    SIZE_SMALL = "маленький (до 30см)"
-    SIZE_MEDIUM = "середній (30-50см)"
-    SIZE_MEDIUM_PLUS = "середній+ (50-60см)"
-    SIZE_LARGE = "великий 60см+"
+    # --- НОВЕ: РОЗМІР ---
+    SIZE_SMALL = "маленький (до 30 см)"
+    SIZE_MEDIUM = "середній (30–50 см)"
+    SIZE_MEDIUM_PLUS = "середній+ (50–60 см)"
+    SIZE_LARGE = "великий 60 см+"
 
-    # --- НОВОЕ: ПОЛ (Стать) ---
+    # --- НОВЕ: СТАТЬ ---
     GENDER_MALE = "хлопчик"
     GENDER_FEMALE = "дівчинка"
 
-    # --- НОВОЕ: ВОЗРАСТ (Вік) ---
+    # --- НОВЕ: ВІК ---
     AGE_UNDER_1 = "до 1 року"
-    AGE_1_5 = "1-5 років"
+    AGE_1_5 = "1–5 років"
     AGE_OVER_5 = "5 і більше років"
 
     # --- ТЕГИ (Інше) ---
-    LOVES_LEARNING = "любить вчитися"
+    LOVES_LEARNING = "люблю вчитися"
     NEEDS_SOCIALIZATION = "потребую соціалізації"
     QUICK_TO_HANDS = "швидко йду на ручки"
     LOVES_CHILDREN = "люблю дітей"
     LOVES_ALL_PETS = "люблю чотирилапих"
-    TURBO = "турбо"  # Добавлено из нового скрина
+    TURBO = "турбо"
     ACTIVE_LEISURE = "обожнюю активне дозвілля"
     PUREBRED = "породистий"
 
-    # Из предыдущего списка (если нужно оставить)
+    # З попереднього списку (якщо потрібно залишити)
     WUNDERKIND = "вундеркінд"
     SERIOUS = "серйозний хвостик"
     ATTENTIVE = "уважний хвостик"
