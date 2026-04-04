@@ -1,0 +1,102 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  width: 600px;
+  height: 600px;
+  background: #ffbb02;
+  border-radius: 25px;
+  padding: 52px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.tabs {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 20px;
+}
+
+.tab {
+  border: none;
+  background: transparent;
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+}
+
+.activeTab {
+  border-bottom: 2px solid white;
+}
+
+.separator {
+  color: white;
+}
+
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.imageWrapper {
+  margin-bottom: 20px;
+}
+
+.authImage {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+}
+
+.label {
+  width: 100%;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.input {
+  width: 490px;
+  height: 50px;
+  border: 2px solid white;
+  border-radius: 999px;
+  background: transparent;
+  color: white;
+  padding: 0 18px;
+  font-size: 16px;
+  margin-bottom: 14px;
+  outline: none;
+}
+
+.input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.submitButton {
+  width: 490px;
+  height: 50px;
+  border: none;
+  border-radius: 999px;
+  background: #E58E00;
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  margin-top: 10px;
+  cursor: pointer;
+}
