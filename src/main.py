@@ -7,9 +7,6 @@ from pets import PetsRouter
 
 app = FastAPI()
 
-# including routers
-app.include_router(PetsRouter)
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -21,6 +18,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# including routers
+app.include_router(PetsRouter)
+
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host=settings.run.host, port=settings.run.port, reload=True)
