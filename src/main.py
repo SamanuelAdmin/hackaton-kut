@@ -23,6 +23,18 @@ app = FastAPI()
 # including routers
 app.include_router(AccountsRouter)
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:1337",
+        "http://127.0.0.1:8000",
+        "https://pets.xhosts.xyz",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 if __name__ == "__main__":
     uvicorn.run("src.main:app", host=configs["host"], port=configs["port"], reload=True)
