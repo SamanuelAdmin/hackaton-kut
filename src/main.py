@@ -21,7 +21,7 @@ load_models(databaseConnector.engine)
 app = FastAPI()
 
 # including routers
-app.include_router(AccountsRouter, prefix="/api/v1")
+app.include_router(AccountsRouter)
 
 
 if __name__ == "__main__":
