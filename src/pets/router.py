@@ -1,8 +1,8 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
 
-from pets.dependencies import PetRepoDap
+from pets.dependencies import PetRepoDap, get_current_user, credentials_exception
 from pets.exceptions import NoEntityByIdFound
-from schemas import AllPetsModel, CreatePetModel, ReadPetModel
+from schemas import AllPetsModel, CreatePetModel, JWTToken, ReadPetModel
 
 router = APIRouter(prefix="/pets", tags=["pets"])
 
@@ -28,12 +28,25 @@ async def get_all(pet_repo: PetRepoDap, offset: int, limit: int):
 
 
 @router.post("", response_model=ReadPetModel)
-async def create_pet(pet: CreatePetModel, pet_repo: PetRepoDap):
+async def create_pet(
+    pet: CreatePetModel,
+    pet_repo: PetRepoDap,
+    current_user: JWTToken = Depends(get_current_user),
+):
+    if current_user.user_rights != "admin":
+        raise credentials_exception
     return await pet_repo.create(pet)
 
 
-@router.put("")
-async def remove_pet(pet_id: int, pet_repo: PetRepoDap):
+@router.delete("")
+async def remove_pet(
+    pet_id: int,
+    pet_repo: PetRepoDap,
+    current_user: JWTToken = Depends(get_current_user),
+):
+    if current_user.user_rights != "admin":
+        raise credentials_exception
+
     try:
         await pet_repo.remove(pet_id)
         return {"status": "ok"}

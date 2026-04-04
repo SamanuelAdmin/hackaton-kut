@@ -20,15 +20,3 @@ class DefaultEnumMeta(EnumMeta):
             # Assume the first enum is default
             return next(iter(cls))
         return super().__call__(value, *args, **kwargs)
-
-
-class CRUD(ABC):
-    _object_type: object = object
-
-    def create(self, obj: _object_type) -> bool: ...
-
-    def get(self, id: int) -> Optional[_object_type]: ...
-
-    def update(self, obj: _object_type) -> bool: ...
-
-    def delete(self, id: int) -> bool: ...

@@ -4,6 +4,17 @@ from pydantic import BaseModel, Field
 
 from pets.enums import AnimalGender, AnimalStatus, AnimalTag, AnimalType
 
+from configs import settings
+
+
+class JWTToken(BaseModel):
+    alg: str = Field(default=settings.jwt.alg)
+    user_id: int
+    user_rights: str
+    ttl: int
+    creation_time: int
+    token: str = Field(default="")
+
 
 class CreatePetModel(BaseModel):
     name: str = Field(max_length=32)

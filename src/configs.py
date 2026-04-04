@@ -15,6 +15,11 @@ class DatabaseConfig(BaseModel):
     echo_pool: bool
 
 
+class JWTConfig(BaseModel):
+    alg: str
+    secret: str
+
+
 class RunConfig(BaseModel):
     host: str = "0.0.0.0"
     port: int = 8002
@@ -28,6 +33,7 @@ class Settings(BaseSettings):
     )
 
     run: RunConfig = RunConfig()
+    jwt: JWTConfig
     db: DatabaseConfig
 
 
