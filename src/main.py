@@ -12,7 +12,7 @@ app.include_router(PetsRouter)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://localhost:1337",
+        "http://localhost:1338",
         "http://127.0.0.1:8000",
         "https://pets.xhosts.xyz",
     ],
