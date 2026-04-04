@@ -1,5 +1,6 @@
 import uvicorn
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from .accounts import AccountsRouter, load_models
 from .database import DatabaseConnection
