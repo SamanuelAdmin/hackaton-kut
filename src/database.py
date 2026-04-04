@@ -5,9 +5,6 @@ from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_asyn
 
 from configs import settings
 
-# MODELS
-# WARN: if remove this imports then all crashed and tables will not create
-# from pets.models import Pet
 
 db = settings.db
 async_postgres_url = (

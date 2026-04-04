@@ -3,6 +3,10 @@ from fastapi import APIRouter, HTTPException, Depends
 from pets.dependencies import PetRepoDap, get_current_user, credentials_exception
 from pets.exceptions import NoEntityByIdFound
 from schemas import AllPetsModel, CreatePetModel, JWTToken, ReadPetModel
+from fastapi import APIRouter
+
+from pets.dependencies import PetRepoDap
+from schemas import AllPetsModel, CreatePetModel, ReadPetModel
 
 router = APIRouter(prefix="/pets", tags=["pets"])
 
@@ -14,11 +18,8 @@ async def health():
 
 @router.get("/{pet_id}", response_model=ReadPetModel)
 async def get_pet(pet_id: int, pet_repo: PetRepoDap):
-    try:
-        pet = await pet_repo.get_by_id(pet_id)
-        return pet
-    except NoEntityByIdFound:
-        raise HTTPException(404, "Not found pet by id.")
+    pet = await pet_repo.get_by_id(pet_id)
+    return pet
 
 
 @router.get("", response_model=AllPetsModel)
@@ -52,3 +53,9 @@ async def remove_pet(
         return {"status": "ok"}
     except NoEntityByIdFound:
         raise HTTPException(404, "Not found pet by id.")
+
+
+@router.put("")
+async def remove_pet(pet_id: int, pet_repo: PetRepoDap):
+    await pet_repo.remove(pet_id)
+    return {"status": "ok"}

@@ -2,12 +2,13 @@ from datetime import datetime
 
 from sqlalchemy import String, func
 from sqlalchemy.dialects.postgresql import ARRAY
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 from pets.enums import AnimalType, AnimalGender, AnimalStatus, AnimalTag
 
-Base = declarative_base()
+
+class Base(DeclarativeBase):
+    pass
 
 
 class Pet(Base):
