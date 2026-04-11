@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://109.87.156.203:33880";
+const API_BASE_URL = "https://pets.xhosts.xyz/api/v1/user";
 
 export async function registerUser({ email, full_name, clear_password }) {
   const response = await fetch(`${API_BASE_URL}/accounts/create`, {
@@ -16,7 +16,7 @@ export async function registerUser({ email, full_name, clear_password }) {
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(data?.detail?.[0]?.msg || "Ошибка регистрации");
+    throw new Error(data?.detail?.[0]?.msg || "Помилка реєстрації");
   }
 
   return data;
@@ -37,7 +37,7 @@ export async function loginUser({ email, password }) {
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(data?.detail?.[0]?.msg || "Ошибка авторизации");
+    throw new Error(data?.detail?.[0]?.msg || "Помилка авторизації");
   }
 
   return data;
