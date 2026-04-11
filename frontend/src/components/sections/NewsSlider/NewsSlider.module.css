@@ -1,0 +1,39 @@
+.sliderWrap {
+  position: relative;
+}
+
+.slider {
+  padding-top: 20px;
+}
+
+.slide {
+  width: 350px !important;
+}
+
+/* стрелки swiper */
+.slider :global(.swiper-button-prev),
+.slider :global(.swiper-button-next) {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #f4b400;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slider :global(.swiper-button-prev::after),
+.slider :global(.swiper-button-next::after) {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.slider :global(.swiper-button-prev:hover),
+.slider :global(.swiper-button-next:hover) {
+  background: #f4b400;
+  color: #fff;
+  transform: scale(1.05);
+}
