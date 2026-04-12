@@ -4,9 +4,10 @@ from pydantic import BaseModel
 from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from pets import Base, Pet
-from pets.exceptions import NoEntityByIdFound
-from schemas import CreatePetModel, UpdatePetModel
+from src.pets.enums import AnimalTag
+from src.pets.models import Base, Pet
+from src.pets.exceptions import NoEntityByIdFound
+from src.schemas import CreatePetModel, UpdatePetModel
 
 T = TypeVar("T", bound=Base)
 P = TypeVar("P", bound=BaseModel)
@@ -85,4 +86,40 @@ class PetRepository(BaseRepository[Pet, CreatePetModel]):
             if (new_v := update_model_dict.get(k)) is not None:
                 setattr(entity, k, new_v)
 
+        await self.session.commit()
         return entity
+
+    async def get_all(
+        self,
+        offset: int,
+        limit: int,
+        tag_filters: list[AnimalTag] | None,
+        min_age: int | None,
+        max_age: int | None,
+        **filters,
+    ) -> tuple[Sequence[Pet], int]:
+        stmt = select(self.model)
+
+        stmt_filters = []
+        if filters:
+            for k, v in filters.items():
+                if hasattr(self.model, k) and getattr(self.model, k) and v is not None:
+                    stmt_filters.append(getattr(self.model, k) == v)
+
+        if tag_filters:
+            stmt_filters.append(self.model.tags.overlap(tag_filters))
+
+        if min_age:
+            stmt_filters.append(self.model.age >= min_age)
+        if max_age:
+            stmt_filters.append(self.model.age <= max_age)
+
+        stmt = stmt.where(*stmt_filters)
+        stmt = stmt.offset(offset).limit(limit)
+
+        res = await self.session.execute(stmt)
+        count = await self.session.execute(
+            select(func.count()).select_from(self.model).where(*stmt_filters)
+        )
+
+        return res.scalars().all(), count.scalar_one()

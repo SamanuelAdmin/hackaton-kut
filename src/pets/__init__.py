@@ -1,6 +1,5 @@
 from .models import Base, Pet
-from .router import router
+from .router import router as PetsRouter
 
-PetsRouter = router
 
-# __all__ = ["Pet", "Base", "Pe"]
+__all__ = ["Pet", "Base", "PetsRouter"]

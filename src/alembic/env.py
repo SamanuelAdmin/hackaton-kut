@@ -6,8 +6,8 @@ from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
 
 from alembic import context
-from database import async_postgres_url
-from pets import Base
+from src.database import async_postgres_url
+from src.pets import Base
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

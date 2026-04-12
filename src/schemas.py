@@ -1,8 +1,9 @@
 from datetime import datetime
 
+from fastapi import Form
 from pydantic import BaseModel, Field
 
-from pets.enums import AnimalGender, AnimalStatus, AnimalTag, AnimalType
+from src.pets.enums import AnimalGender, AnimalStatus, AnimalTag, AnimalType
 
 from configs import settings
 
@@ -26,23 +27,34 @@ class CreatePetModel(BaseModel):
     tags: list[AnimalTag]
 
 
-class ReadPetModel(BaseModel):
+class CreatePetForm(BaseModel):
+    name: str = Form(max_length=32)
+    type: AnimalType = Form()
+    gender: AnimalGender = Form()
+    age: int = Form()
+    description: str = Form()
+    status: AnimalStatus = Form()
+    tags: list[AnimalTag] = Form()
+
+
+class ReadPetModel(CreatePetModel):
     id: int
 
-    name: str = Field(max_length=32)
-    type: AnimalType
-    gender: AnimalGender
-    age: int
-    description: str
-    status: AnimalStatus
-    tags: list[AnimalTag] = []
+    image: str | None
 
-    created_at: datetime
-    updated_at: datetime
+    created_at: datetime | None = None
+    updated_at: datetime | None = None
 
 
-class UpdatePetModel(CreatePetModel):
-    pass
+class UpdatePetModel(BaseModel):
+    name: str | None = None
+    type: AnimalType | None = None
+    gender: AnimalGender | None = None
+    age: int | None = None
+    description: str | None = None
+    status: AnimalStatus | None = None
+    tags: list[AnimalTag] | None = None
+    image: str | None
 
 
 class AllPetsModel(BaseModel):

@@ -25,6 +25,14 @@ class RunConfig(BaseModel):
     port: int = 8002
 
 
+class MinioConfig(BaseModel):
+    minio_bucket_name: str = "images"
+    endpoint: str = "127.0.0.1"
+    access_key: str = "admin"
+    secret_key: str = "password"
+    secure: bool = False
+
+
 class Settings(BaseSettings):
     model_config: ClassVar = SettingsConfigDict(
         env_file=(".env.template", ".env", "../.env"),
@@ -35,6 +43,7 @@ class Settings(BaseSettings):
     run: RunConfig = RunConfig()
     jwt: JWTConfig
     db: DatabaseConfig
+    minio: MinioConfig
 
 
 settings = Settings()
