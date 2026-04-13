@@ -1,9 +1,12 @@
 from datetime import datetime
+from enum import Enum
 
 from fastapi import Form
 from pydantic import BaseModel, Field
 
 from src.pets.enums import AnimalGender, AnimalStatus, AnimalTag, AnimalType
+from src.utils import DefaultEnumMeta
+
 
 from configs import settings
 
@@ -15,6 +18,19 @@ class JWTToken(BaseModel):
     ttl: int
     creation_time: int
     token: str = Field(default="")
+
+
+class UserRights(str, Enum, metaclass=DefaultEnumMeta):
+    USER = "user"
+    ADMIN = "admin"
+
+
+class UserDTO(BaseModel):
+    id: int = Field(default=-1)
+    rights: UserRights = Field(default=UserRights())
+    full_name: str
+    email: str
+    password: str  # encrypted
 
 
 class CreatePetModel(BaseModel):

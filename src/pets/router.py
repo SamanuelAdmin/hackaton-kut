@@ -1,12 +1,14 @@
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, HTTPException, Depends, Body, UploadFile
 
-from pets.dependencies import PetRepoDap, get_current_user, credentials_exception
-from schemas import AllPetsModel, CreatePetModel, JWTToken, ReadPetModel
-from fastapi import APIRouter, Body, UploadFile
+from src.pets.dependencies import (
+    PetRepoDap,
+    get_current_user,
+    credentials_exception,
+    PetServiceDap,
+)
+from src.schemas import AllPetsModel, CreatePetModel, JWTToken, ReadPetModel
 
-from src.pets.dependencies import PetRepoDap, PetServiceDap
 from src.pets.enums import AnimalGender, AnimalStatus, AnimalTag
-from src.schemas import AllPetsModel, CreatePetModel, ReadPetModel
 
 router = APIRouter(prefix="/pets", tags=["pets"])
 

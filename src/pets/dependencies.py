@@ -2,22 +2,20 @@ from functools import lru_cache
 from typing import Annotated
 
 from fastapi import Depends, HTTPException, status
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
-from fastapi import Depends
-from minio import Minio
+from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.ext.asyncio import AsyncSession
+
+from minio import Minio
 
 from src.database import get_session
 from src.configs import settings
 
-from configs import settings
-from src.service import JWTService
-from schemas import JWTToken
-from src.repository import PetRepository
+from src.schemas import JWTToken
 from src.pets.repository import PetRepository
 from src.pets.services.file_validator import ImageValidatorService
 from src.pets.services.minio_service import MinioService
 from src.pets.services.pet_service import PetService
+from src.pets.service import JWTService
 
 SessionDep = Annotated[AsyncSession, Depends(get_session)]
 

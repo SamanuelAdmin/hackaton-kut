@@ -4,9 +4,9 @@ import hashlib
 import json
 import base64
 
-from utils import Singleton
-from schemas import JWTToken
-from pets.exceptions import (
+from src.utils import Singleton
+from src.schemas import JWTToken
+from src.pets.exceptions import (
     ExpiredTokenError,
     InvalidSignature,
     IncorrectTokenStructure,
