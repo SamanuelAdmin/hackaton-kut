@@ -40,3 +40,6 @@ pycache/
 .pytest_cache/
 .coverage
 htmlcov/
+
+data/
+*.egg-info
