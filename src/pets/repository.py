@@ -58,15 +58,9 @@ class BaseRepository(Generic[T, P]):
 
         return res.scalars().all(), count.scalar_one()
 
-    async def get_random(self, limit: int, **filters) -> Sequence[T]:
-        stmt_filters = []
-        if filters:
-            for k, v in filters.items():
-                if hasattr(self.model, k) and getattr(self.model, k):
-                    stmt_filters.append(getattr(self.model, k) == v)
-
+    async def get_random(self, limit: int) -> Sequence[T]:
         projects = await self.session.execute(
-            select(self.model).where(*stmt_filters).order_by(func.rand()).limit(limit)
+            select(self.model).order_by(func.random()).limit(limit)
         )
         return projects.scalars().all()
 

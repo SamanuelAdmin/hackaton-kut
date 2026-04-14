@@ -18,6 +18,11 @@ async def health():
     return {"status": "ok"}
 
 
+@router.get("/random", response_model=list[ReadPetModel])
+async def get_random(pet_repo: PetRepoDap, limit: int = 5):
+    return await pet_repo.get_random(limit)
+
+
 @router.get("/{pet_id}", response_model=ReadPetModel)
 async def get_pet(pet_id: int, pet_repo: PetRepoDap):
     pet = await pet_repo.get_by_id(pet_id)
